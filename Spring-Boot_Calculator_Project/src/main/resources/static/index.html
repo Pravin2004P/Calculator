@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Simple Calculator</h1>
+    </header>
+    <form id="calcForm">
+        <input type="text" name="num1" placeholder="Enter first number">
+        <input type="text" name="num2" placeholder="Enter second number">
+        <select name="operation">
+            <option value="add">Add</option>
+            <option value="subtract">Subtract</option>
+            <option value="multiply">Multiply</option>
+            <option value="divide">Divide</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <main>
+        <p>This is a simple HTML page.</p>
+        <p id="result"></p>
+    </main>
+    <footer>
+        <p>&copy; 2023 My Project</p>
+    </footer>
+    <script>
+        document.getElementById('calcForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const params = new URLSearchParams(formData).toString();
+            fetch(`process-form?${params}`)
+                .then(response => response.text())
+                .then(result => {
+                    document.getElementById('result').textContent = `Result: ${result}`;
+                });
+        });
+    </script>
+</body>
+</html>
